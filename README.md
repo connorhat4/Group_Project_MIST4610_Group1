@@ -10,7 +10,7 @@ Group Members:
 # Problem Description:
 
 # Data Model:
-Explanation of data mode:
+Explanation of data model:
 
 &emsp; Our data model represents the overall process of a patient receiving a prescription from the hospital. Hospital is the first entity in the journey throughout the mode, information such as its name, address, phone number, and the type of hospital that it is are all displayed. A hospital can have many patients, but a patient can only get an appointment with one hospital at a time (thus creating a one-to-many relationship between the hospital and the patient). The Patient entity has basic identifying information that is similar to Hospital (name, address, and phone), but it also includes an email and categorical information such as sex, race, and age. The patient will need to meet with a certain type of doctor for their specific needs, this creates the need for the hospital to be divided into multiple departments. A one-to-many relationship is created between Hospital and Department since a hospital can have multiple departments, but a department can only belong to one hospital.
 
