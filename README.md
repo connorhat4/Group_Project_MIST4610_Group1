@@ -29,7 +29,8 @@ The result of an appointment is one or more prescriptions, because of this, a ne
 <img width="1013" alt="Screenshot 2024-09-25 at 5 27 36 PM" src="https://github.com/user-attachments/assets/a6dfe814-9592-48e0-b97c-cba7744a61b5">
 <img width="1036" alt="Screenshot 2024-09-25 at 5 30 18 PM" src="https://github.com/user-attachments/assets/50edd5b8-b86f-4d63-9d8a-5870631490af">
 <img width="1118" alt="Screenshot 2024-09-25 at 5 31 23 PM" src="https://github.com/user-attachments/assets/f6207a08-ee65-45f8-9610-3d0d76503b46">
-<img width="875" alt="Screenshot 2024-09-25 at 5 32 11 PM" src="https://github.com/user-attachments/assets/7b59847f-29e0-4ae5-bd8c-f0d60cd94e04">
+<img width="788" alt="Screenshot 2024-09-25 at 5 38 29 PM" src="https://github.com/user-attachments/assets/12fd853e-701d-4b56-b668-e86ee8f66d93">
+
 
 
 
