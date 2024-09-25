@@ -1,4 +1,4 @@
-# Team 1 MIST 4610 Group Project 1
+[patient_data_dictionary.csv](https://github.com/user-attachments/files/17138507/patient_data_dictionary.csv)# Team 1 MIST 4610 Group Project 1
 Team Name: Group 1
 
 Group Members:
@@ -23,6 +23,15 @@ The result of an appointment is one or more prescriptions, because of this, a ne
 
 
 # Data Dictionary:
+<img width="563" alt="Screenshot 2024-09-25 at 4 57 04 PM" src="https://github.com/user-attachments/assets/0cc8445f-3260-43a7-aa8e-e6ecc5997c9c">
+<img width="536" alt="Screenshot 2024-09-25 at 5 13 06 PM" src="https://github.com/user-attachments/assets/56c21dd3-a297-4042-9ebe-afd14de4afd6">
+<img width="594" alt="Screenshot 2024-09-25 at 5 13 34 PM" src="https://github.com/user-attachments/assets/1c8aabf1-8474-4480-9e00-917b33d33f4c">
+<img width="626" alt="Screenshot 2024-09-25 at 5 14 05 PM" src="https://github.com/user-attachments/assets/4a72372b-8514-4642-8c30-02278d293ec5">
+<img width="598" alt="Screenshot 2024-09-25 at 5 14 33 PM" src="https://github.com/user-attachments/assets/aa7538d2-e833-42d8-90fb-7f209ae030d3">
+<img width="605" alt="Screenshot 2024-09-25 at 5 14 59 PM" src="https://github.com/user-attachments/assets/0229e1c9-445e-468d-af52-ecdac866b3ea">
+<img width="543" alt="Screenshot 2024-09-25 at 5 15 28 PM" src="https://github.com/user-attachments/assets/7e9966f4-fc97-4aef-88f7-f60daf91e167">
+
+
 
 # Queries:
 
