@@ -1,4 +1,4 @@
-[patient_data_dictionary.csv](https://github.com/user-attachments/files/17138507/patient_data_dictionary.csv)# Team 1 MIST 4610 Group Project 1
+# Team 1 MIST 4610 Group Project 1
 Team Name: Group 1
 
 Group Members:
