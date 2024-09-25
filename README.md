@@ -18,6 +18,8 @@ Our data model represents the overall process of a patient receiving a prescript
 
   For an appointment to be made, a connection must be made between a patient and a specified doctor. The Appointment entity is created through an identifying many-to-many relationship. A doctor could meet with multiple patients and a patient could meet with multiple doctors, therefore, this special type of relationship between the two entities results in a unique appointment that can be identified by the ID of the two. To make the appointment even more unique, the date of the appointment and the reason for the appointment are added to the Appointment entity.
 The result of an appointment is one or more prescriptions, because of this, a new Prescription entity must be created along with a one-to-many relationship to connect the two entities. A prescription is comprised of the IDs of the patient and doctor (which are taken from their respective entity through the appointment entity), the date of the prescription, and the ID of the prescribed medication. The ID of the medication is taken from the Medication entity (which has a one-to-many relationship with the prescription entity). This relationship comes from the fact that a certain type of medication can be found in multiple prescriptions, but a prescription should only contain one type of medication. If an appointment results in the patient needing more than one type of medication, the doctor will write up a prescription for each additional one. The Medication entity includes the name, price, and recommended dosage of the medication.
+![Group Project 1 Data Model](https://github.com/user-attachments/assets/2ec911d4-8f71-4211-9a9d-45213b59512e)
+
 
 # Data Dictionary:
 
