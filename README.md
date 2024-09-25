@@ -23,13 +23,14 @@ The result of an appointment is one or more prescriptions, because of this, a ne
 
 
 # Data Dictionary:
-<img width="563" alt="Screenshot 2024-09-25 at 4 57 04 PM" src="https://github.com/user-attachments/assets/0cc8445f-3260-43a7-aa8e-e6ecc5997c9c">
-<img width="536" alt="Screenshot 2024-09-25 at 5 13 06 PM" src="https://github.com/user-attachments/assets/56c21dd3-a297-4042-9ebe-afd14de4afd6">
-<img width="594" alt="Screenshot 2024-09-25 at 5 13 34 PM" src="https://github.com/user-attachments/assets/1c8aabf1-8474-4480-9e00-917b33d33f4c">
-<img width="626" alt="Screenshot 2024-09-25 at 5 14 05 PM" src="https://github.com/user-attachments/assets/4a72372b-8514-4642-8c30-02278d293ec5">
-<img width="598" alt="Screenshot 2024-09-25 at 5 14 33 PM" src="https://github.com/user-attachments/assets/aa7538d2-e833-42d8-90fb-7f209ae030d3">
-<img width="605" alt="Screenshot 2024-09-25 at 5 14 59 PM" src="https://github.com/user-attachments/assets/0229e1c9-445e-468d-af52-ecdac866b3ea">
-<img width="543" alt="Screenshot 2024-09-25 at 5 15 28 PM" src="https://github.com/user-attachments/assets/7e9966f4-fc97-4aef-88f7-f60daf91e167">
+<img width="821" alt="Screenshot 2024-09-25 at 5 21 16 PM" src="https://github.com/user-attachments/assets/42a20e99-d167-4ad2-a97c-d2bc90dd2bba">
+<img width="869" alt="Screenshot 2024-09-25 at 5 22 49 PM" src="https://github.com/user-attachments/assets/7e843163-c362-4461-a979-ad9d2846821e">
+<img width="1023" alt="Screenshot 2024-09-25 at 5 26 37 PM" src="https://github.com/user-attachments/assets/142f7e73-36d2-4fea-be79-b8c9cad54544">
+<img width="1013" alt="Screenshot 2024-09-25 at 5 27 36 PM" src="https://github.com/user-attachments/assets/a6dfe814-9592-48e0-b97c-cba7744a61b5">
+<img width="1036" alt="Screenshot 2024-09-25 at 5 30 18 PM" src="https://github.com/user-attachments/assets/50edd5b8-b86f-4d63-9d8a-5870631490af">
+<img width="1118" alt="Screenshot 2024-09-25 at 5 31 23 PM" src="https://github.com/user-attachments/assets/f6207a08-ee65-45f8-9610-3d0d76503b46">
+<img width="875" alt="Screenshot 2024-09-25 at 5 32 11 PM" src="https://github.com/user-attachments/assets/7b59847f-29e0-4ae5-bd8c-f0d60cd94e04">
+
 
 
 
