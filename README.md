@@ -4,8 +4,8 @@ Team Name: Group 1
 Group Members:
 1. Connor Hatfield
 2. Jordan Peterkin
-3. 
-4. 
+3. Michael Espinoza
+4. Naysa Rokkala
 
 # Problem Description:
 
