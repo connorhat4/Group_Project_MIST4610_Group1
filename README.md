@@ -11,6 +11,8 @@ Group Members:
 
 # Data Model:
 
+# Data Dictionary:
+
 # Queries:
 
 # Database information:
