@@ -1,16 +1,7 @@
+-- Use the database
 USE ha_crh06350;
 
-CREATE TABLE Patient (
-    patient_id INT PRIMARY KEY,
-    hospital_id INT,
-    patient_name VARCHAR(45),
-    patient_address VARCHAR(45),
-    patient_email VARCHAR(45),
-    patient_phone INT,
-    sex VARCHAR(45),
-    race VARCHAR(45),
-    age INT
-);
+-- Creating Tables with Foreign Keys
 
 CREATE TABLE Hospital (
     hospital_id INT PRIMARY KEY,
@@ -23,11 +14,13 @@ CREATE TABLE Hospital (
 CREATE TABLE Department (
     department_id INT PRIMARY KEY,
     hospital_id INT,
-    doctor_id INT,
+    department_head_id INT,
     department_name VARCHAR(45),
     department_phone INT,
     size INT,
-    floor INT
+    floor INT,
+    FOREIGN KEY (hospital_id) REFERENCES Hospital(hospital_id),
+    FOREIGN KEY (department_head_id) REFERENCES Doctor(doctor_id)  -- reference department heads
 );
 
 CREATE TABLE Doctor (
@@ -37,7 +30,21 @@ CREATE TABLE Doctor (
     doctor_phone INT,
     doctor_email VARCHAR(45),
     years_of_experience INT,
-    salary INT
+    salary INT,
+    FOREIGN KEY (department_id) REFERENCES Department(department_id)
+);
+
+CREATE TABLE Patient (
+    patient_id INT PRIMARY KEY,
+    hospital_id INT,
+    patient_name VARCHAR(45),
+    patient_address VARCHAR(45),
+    patient_email VARCHAR(45),
+    patient_phone INT,
+    sex VARCHAR(45),
+    race VARCHAR(45),
+    age INT,
+    FOREIGN KEY (hospital_id) REFERENCES Hospital(hospital_id)
 );
 
 CREATE TABLE Appointment (
@@ -45,15 +52,9 @@ CREATE TABLE Appointment (
     doctor_id INT,
     appointment_date DATE,
     reason_for_appointment VARCHAR(45),
-    PRIMARY KEY (patient_id, doctor_id)
-);
-
-CREATE TABLE Prescription (
-    prescription_id INT PRIMARY KEY,
-    patient_id INT,
-    doctor_id INT,
-    medication_id INT,
-    prescription_date DATE
+    PRIMARY KEY (patient_id, doctor_id, appointment_date),
+    FOREIGN KEY (patient_id) REFERENCES Patient(patient_id),
+    FOREIGN KEY (doctor_id) REFERENCES Doctor(doctor_id)
 );
 
 CREATE TABLE Medication (
@@ -62,6 +63,19 @@ CREATE TABLE Medication (
     dosage VARCHAR(45),
     price DECIMAL(6,2)
 );
+
+CREATE TABLE Prescription (
+    prescription_id INT PRIMARY KEY,
+    patient_id INT,
+    doctor_id INT,
+    medication_id INT,
+    prescription_date DATE,
+    FOREIGN KEY (patient_id) REFERENCES Patient(patient_id),
+    FOREIGN KEY (doctor_id) REFERENCES Doctor(doctor_id),
+    FOREIGN KEY (medication_id) REFERENCES Medication(medication_id)
+);
+
+-- Inserting Data
 
 INSERT INTO Hospital VALUES 
 (1, 'City Hospital', '123 Main St', 1234567890, 'General'),
@@ -117,32 +131,79 @@ INSERT INTO Appointment VALUES
 (1003, 101, '2023-09-17', 'Follow-up on heart issues'),
 (1004, 104, '2023-09-18', 'Pediatric care'),
 (1005, 105, '2023-09-19', 'Urgent care visit'),
-(1006, 106, '2023-09-20', 'Newborn checkup'),
+(1006, 106, '2023-09-20', 'Neonatal care'),
 (1007, 107, '2023-09-21', 'Skin rash treatment'),
-(1008, 108, '2023-09-22', 'Cancer consultation'),
-(1009, 109, '2023-09-23', 'Digestive issues consultation'),
-(1010, 110, '2023-09-24', 'Hormone imbalance check');
+(1008, 108, '2023-09-22', 'Oncology consultation'),
+(1009, 109, '2023-09-23', 'Gastrointestinal issues'),
+(1010, 110, '2023-09-24', 'Endocrine system checkup');
 
-INSERT INTO Medication VALUES 
-(201, 'Aspirin', '100mg', 5.99),
-(202, 'Ibuprofen', '200mg', 7.99),
-(203, 'Lisinopril', '10mg', 15.49),
-(204, 'Amoxicillin', '500mg', 12.99),
-(205, 'Metformin', '850mg', 8.99),
-(206, 'Prednisone', '20mg', 10.99),
-(207, 'Loratadine', '10mg', 6.99),
-(208, 'Acetaminophen', '500mg', 4.99),
-(209, 'Atorvastatin', '40mg', 18.49),
-(210, 'Clopidogrel', '75mg', 22.99);
+-- Queries
 
-INSERT INTO Prescription VALUES 
-(301, 1001, 101, 201, '2023-09-15'),
-(302, 1002, 102, 202, '2023-09-16'),
-(303, 1003, 101, 203, '2023-09-17'),
-(304, 1004, 104, 204, '2023-09-18'),
-(305, 1005, 105, 205, '2023-09-19'),
-(306, 1006, 106, 206, '2023-09-20'),
-(307, 1007, 107, 207, '2023-09-21'),
-(308, 1008, 108, 208, '2023-09-22'),
-(309, 1009, 109, 209, '2023-09-23'),
-(310, 1010, 110, 210, '2023-09-24');
+-- Simple Queries
+
+-- Query 1: List all patients' names and their corresponding hospitals.
+SELECT p.patient_name, h.hospital_name 
+FROM Patient p
+JOIN Hospital h ON p.hospital_id = h.hospital_id;
+
+-- Query 2: Count the number of patients in each hospital.
+SELECT h.hospital_name, COUNT(p.patient_id) AS patient_count
+FROM Hospital h
+JOIN Patient p ON h.hospital_id = p.hospital_id
+GROUP BY h.hospital_name;
+
+-- Query 3: Find all appointments for a specific doctor by name.
+SELECT a.appointment_date, p.patient_name 
+FROM Appointment a
+JOIN Patient p ON a.patient_id = p.patient_id
+JOIN Doctor d ON a.doctor_id = d.doctor_id
+WHERE d.doctor_name = 'Dr. Smith';
+
+-- Query 4: List all medications and their prices.
+SELECT medication_name, price
+FROM Medication;
+
+-- Complex Queries
+
+-- Query 5: Find doctors with more than 10 years of experience and their corresponding department names.
+SELECT d.doctor_name, dep.department_name, d.years_of_experience
+FROM Doctor d
+JOIN Department dep ON d.department_id = dep.department_id
+WHERE d.years_of_experience > 10;
+
+-- Query 6: Get the total salary paid to doctors in each hospital.
+SELECT h.hospital_name, SUM(d.salary) AS total_salary
+FROM Hospital h
+JOIN Department dep ON h.hospital_id = dep.hospital_id
+JOIN Doctor d ON dep.department_id = d.department_id
+GROUP BY h.hospital_name;
+
+-- Query 7: List all prescriptions made for a specific patient and the medications prescribed.
+SELECT p.patient_name, m.medication_name, pr.prescription_date
+FROM Prescription pr
+JOIN Patient p ON pr.patient_id = p.patient_id
+JOIN Medication m ON pr.medication_id = m.medication_id
+WHERE p.patient_name = 'John Doe';
+
+-- Query 8: Find the average price of medications prescribed by each doctor.
+SELECT d.doctor_name, AVG(m.price) AS avg_medication_price
+FROM Prescription pr
+JOIN Doctor d ON pr.doctor_id = d.doctor_id
+JOIN Medication m ON pr.medication_id = m.medication_id
+GROUP BY d.doctor_name;
+
+-- Query 9: Get the total number of appointments per doctor and the hospital they are associated with.
+SELECT d.doctor_name, h.hospital_name, COUNT(a.patient_id) AS total_appointments
+FROM Appointment a
+JOIN Doctor d ON a.doctor_id = d.doctor_id
+JOIN Department dep ON d.department_id = dep.department_id
+JOIN Hospital h ON dep.hospital_id = h.hospital_id
+GROUP BY d.doctor_name, h.hospital_name;
+
+-- Query 10: Find the total number of appointments for each department, along with the hospital name.
+SELECT dep.department_name, h.hospital_name, COUNT(app.patient_id) AS total_appointments
+FROM Department dep
+JOIN Hospital h ON dep.hospital_id = h.hospital_id
+JOIN Doctor doc ON dep.department_id = doc.department_id
+JOIN Appointment app ON doc.doctor_id = app.doctor_id
+GROUP BY dep.department_name, h.hospital_name;
