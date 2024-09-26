@@ -141,69 +141,104 @@ INSERT INTO Appointment VALUES
 
 -- Simple Queries
 
--- Query 1: List all patients' names and their corresponding hospitals.
-SELECT p.patient_name, h.hospital_name 
+-- Query 1 (Simple): List All Patients with Their Corresponding Hospital
+-- Natural Language: Retrieve a list of all patients along with the hospitals they are associated with.
+-- Managerial Justification: This query provides an overview of which hospital each patient is associated with. Managers can use this information to monitor hospital capacity, identify patients at specific locations, and manage resources efficiently.
+SELECT p.patient_name, h.hospital_name
 FROM Patient p
 JOIN Hospital h ON p.hospital_id = h.hospital_id;
 
--- Query 2: Count the number of patients in each hospital.
+
+
+-- Query 2 (Simple): List All Medications Along with Their Price and Dosage
+-- Natural Language: Retrieve all medications along with their price and dosage information.
+-- Managerial Justification: This query provides an overview of the hospital’s medication inventory. Managers can use this information for inventory control and to ensure that medications are priced appropriately for patients.
+SELECT medication_name, dosage, price
+FROM Medication;
+
+
+
+-- Query 3 (Simple): Count of Patients in Each Hospital
+-- Natural Language: Find the total number of patients admitted to each hospital.
+-- Managerial Justification: This query helps managers understand the distribution of patients across hospitals. It aids in hospital resource allocation, staff management, and decision-making regarding expansions or reallocations based on patient loads.
 SELECT h.hospital_name, COUNT(p.patient_id) AS patient_count
 FROM Hospital h
 JOIN Patient p ON h.hospital_id = p.hospital_id
 GROUP BY h.hospital_name;
 
--- Query 3: Find all appointments for a specific doctor by name.
-SELECT a.appointment_date, p.patient_name 
-FROM Appointment a
-JOIN Patient p ON a.patient_id = p.patient_id
-JOIN Doctor d ON a.doctor_id = d.doctor_id
-WHERE d.doctor_name = 'Dr. Smith';
 
--- Query 4: List all medications and their prices.
-SELECT medication_name, price
-FROM Medication;
+
+-- Query 4 (Simple): Total Number of Appointments per Doctor
+-- Natural Language: Retrieve the total number of appointments handled by each doctor.
+-- Managerial Justification: This query helps managers assess the workload of each doctor. It is essential for workforce planning and determining whether doctors are overworked or underutilized.
+SELECT d.doctor_name, COUNT(a.patient_id) AS total_appointments
+FROM Appointment a
+JOIN Doctor d ON a.doctor_id = d.doctor_id
+GROUP BY d.doctor_name;
+
+
 
 -- Complex Queries
 
--- Query 5: Find doctors with more than 10 years of experience and their corresponding department names.
-SELECT d.doctor_name, dep.department_name, d.years_of_experience
-FROM Doctor d
-JOIN Department dep ON d.department_id = dep.department_id
-WHERE d.years_of_experience > 10;
-
--- Query 6: Get the total salary paid to doctors in each hospital.
+-- Query 5 (Complex): Total Salary Paid to Doctors in Each Hospital
+-- Natural Language: Find the total salary of doctors for each hospital.
+-- Managerial Justification: This query helps managers assess the total salary expenditure on doctors for each hospital. It provides insights into hospital costs and helps in budgeting and financial planning.
 SELECT h.hospital_name, SUM(d.salary) AS total_salary
 FROM Hospital h
 JOIN Department dep ON h.hospital_id = dep.hospital_id
 JOIN Doctor d ON dep.department_id = d.department_id
 GROUP BY h.hospital_name;
 
--- Query 7: List all prescriptions made for a specific patient and the medications prescribed.
-SELECT p.patient_name, m.medication_name, pr.prescription_date
-FROM Prescription pr
-JOIN Patient p ON pr.patient_id = p.patient_id
-JOIN Medication m ON pr.medication_id = m.medication_id
-WHERE p.patient_name = 'John Doe';
 
--- Query 8: Find the average price of medications prescribed by each doctor.
+
+-- Query 6 (Complex): Average Medication Price Prescribed by Each Doctor
+-- Natural Language: Calculate the average price of medications prescribed by each doctor.
+-- Managerial Justification: This query helps managers monitor the average cost of medications prescribed by doctors, allowing them to identify trends and manage costs for both patients and the hospital.
 SELECT d.doctor_name, AVG(m.price) AS avg_medication_price
 FROM Prescription pr
 JOIN Doctor d ON pr.doctor_id = d.doctor_id
 JOIN Medication m ON pr.medication_id = m.medication_id
 GROUP BY d.doctor_name;
 
--- Query 9: Get the total number of appointments per doctor and the hospital they are associated with.
-SELECT d.doctor_name, h.hospital_name, COUNT(a.patient_id) AS total_appointments
+
+
+-- Query 7 (Complex): Patients Who Have Never Been Prescribed a Medication
+-- Natural Language: List patients who have never received a prescription.
+-- Managerial Justification: This query identifies patients who may not have received proper follow-up care. Managers can use this data to ensure that all patients have received appropriate prescriptions and care when needed.
+SELECT p.patient_name
+FROM Patient p
+WHERE NOT EXISTS (SELECT 1 FROM Prescription pr WHERE p.patient_id = pr.patient_id);
+
+
+-- Query 8 (Complex): Total Number of Appointments by Department
+-- Natural Language: Find the total number of appointments handled by each department.
+-- Managerial Justification: This query helps managers assess the workload for each department. It provides insight into whether specific departments are under or overburdened and can guide resource allocation.
+SELECT dep.department_name, COUNT(a.patient_id) AS total_appointments
 FROM Appointment a
 JOIN Doctor d ON a.doctor_id = d.doctor_id
 JOIN Department dep ON d.department_id = dep.department_id
-JOIN Hospital h ON dep.hospital_id = h.hospital_id
-GROUP BY d.doctor_name, h.hospital_name;
+GROUP BY dep.department_name;
 
--- Query 10: Find the total number of appointments for each department, along with the hospital name.
-SELECT dep.department_name, h.hospital_name, COUNT(app.patient_id) AS total_appointments
-FROM Department dep
-JOIN Hospital h ON dep.hospital_id = h.hospital_id
-JOIN Doctor doc ON dep.department_id = doc.department_id
-JOIN Appointment app ON doc.doctor_id = app.doctor_id
-GROUP BY dep.department_name, h.hospital_name;
+
+
+-- Query 9 (Complex): Doctors Who Have Prescribed More Than One Medication
+-- Natural Language: Find doctors who have prescribed more than one type of medication.
+-- Managerial Justification: This query identifies doctors who have prescribed a wider variety of medications. This may indicate a broader scope of care or more complex cases and can help managers analyze prescribing habits.
+SELECT d.doctor_name, COUNT(DISTINCT m.medication_id) AS medication_count
+FROM Prescription pr
+JOIN Doctor d ON pr.doctor_id = d.doctor_id
+JOIN Medication m ON pr.medication_id = m.medication_id
+GROUP BY d.doctor_name
+HAVING medication_count > 1;
+
+
+
+-- Query 10 (Complex): Highest Earning Doctor in Each Department
+-- Natural Language: Identify the doctor with the highest salary in each department.
+-- Managerial Justification: This query is useful for managers in determining compensation strategies, analyzing how the highest-paid doctors are distributed across departments, and ensuring equitable pay across the organization.
+SELECT dep.department_name, d.doctor_name, d.salary
+FROM Doctor d
+JOIN Department dep ON d.department_id = dep.department_id
+WHERE d.salary = (SELECT MAX(d2.salary) FROM Doctor d2 WHERE d2.department_id = d.department_id);
+
+
