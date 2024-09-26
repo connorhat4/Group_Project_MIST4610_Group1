@@ -38,3 +38,12 @@ The result of an appointment is one or more prescriptions, because of this, a ne
 # Queries:
 
 # Database information:
+| Feature                    | Query 1 | Query 2 | Query 3 | Query 4 | Query 5 | Query 6 | Query 7 | Query 8 | Query 9 | Query 10 |
+|----------------------------|---------|---------|---------|---------|---------|---------|---------|---------|---------|----------|
+| **Multiple Table Join**     |    x    |         |    x    |    x    |    x    |    x    |         |    x    |    x    |    x     |
+| **Subquery**                |         |         |         |         |         |         |    x    |         |         |    x     |
+| **Aggregation (SUM, AVG)**  |         |         |    x    |    x    |    x    |    x    |         |    x    |         |          |
+| **HAVING Clause**           |         |         |         |         |         |         |         |         |    x    |          |
+| **Group By**                |         |         |    x    |    x    |    x    |    x    |         |    x    |    x    |    x     |
+| **NOT EXISTS Clause**       |         |         |         |         |         |         |    x    |         |         |          |
+
