@@ -5,7 +5,7 @@ Group Members:
 1. Connor Hatfield [@connorhat4](url)
 2. Jordan Peterkin [@jpeterkin29](url)
 3. Michael Espinoza [@Michael8272](url)
-4. Naysa Rokkala
+4. Naysa Rokkala [@naysarokk](url)
 
 # Problem Description:
 &emsp; The task at hand is to model and build a relational database for the general workings of a healthcare system. The central entity in the model is the Hospital entity of the healthcare network—each hospital represents a physical facility in various locations that the healthcare system owns and operates. Each hospital manages departments, doctors, patients, appointments, prescriptions, and medications. We are interested in accurately modeling these relationships, generating sample data, and populating the entities and their attributes with this sample data. Additionally, we need to ensure that the model can support day-to-day operations such as scheduling patient appointments with doctors, assigning prescriptions, and managing medication inventories. Furthermore, we are interested in performing functional queries on this data to provide valuable business and operational insights, such as identifying the most active doctors, tracking patient demographics, monitoring department sizes, and analyzing hospital capacity and medication distribution.
