@@ -3,7 +3,7 @@ Team Name: Group 1
 
 Group Members:
 1. Connor Hatfield [@connorhat4](url)
-2. Jordan Peterkin
+2. Jordan Peterkin [@jpeterkin29]
 3. Michael Espinoza [@Michael8272](url)
 4. Naysa Rokkala
 
