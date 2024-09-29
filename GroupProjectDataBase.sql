@@ -199,14 +199,18 @@ GROUP BY doctor_id;
 -- Complex Queries
 
 -- 1. Find doctors and their corresponding hospitals
-SELECT D.doctor_name, H.hospital_name
-FROM Doctor D
-JOIN Hospital H ON D.hospital_id = H.hospital_id;
+SELECT D.doctor_name, H.hospital_name 
+FROM Doctor D 
+JOIN Hospital H ON D.hospital_id = H.hospital_id 
+ORDER BY H.hospital_name;
+
 
 -- 2. Get the average salary of doctors by their years of experience
-SELECT years_of_experience, AVG(salary) AS average_salary
-FROM Doctor
-GROUP BY years_of_experience;
+SELECT years_of_experience, AVG(salary) AS average_salary 
+FROM Doctor 
+GROUP BY years_of_experience 
+HAVING AVG(salary) > 200000;
+
 
 -- 3. List patients and their doctors for a specific appointment date
 SELECT P.patient_name, D.doctor_name, A.appointment_date
@@ -215,19 +219,25 @@ JOIN Patient P ON A.patient_id = P.patient_id
 JOIN Doctor D ON A.doctor_id = D.doctor_id
 WHERE A.appointment_date = '2023-09-24';  -- Change the date as needed
 
--- 4. Get the total number of appointments per hospital
-SELECT H.hospital_name, COUNT(A.patient_id) AS total_appointments
-FROM Appointment A
-JOIN Patient P ON A.patient_id = P.patient_id
-JOIN Hospital H ON P.hospital_id = H.hospital_id
-GROUP BY H.hospital_name;
+-- 4. Get the total number of appointments per hospital, filtering those with more than 1 appointment.
+SELECT H.hospital_name, COUNT(A.patient_id) AS total_appointments 
+FROM Appointment A 
+JOIN Patient P ON A.patient_id = P.patient_id 
+JOIN Hospital H ON P.hospital_id = H.hospital_id 
+GROUP BY H.hospital_name 
+HAVING COUNT(A.patient_id) > 1;
 
--- 5. Find patients who have appointments with doctors earning above a certain salary
-SELECT P.patient_name, D.doctor_name, D.salary
-FROM Appointment A
-JOIN Patient P ON A.patient_id = P.patient_id
-JOIN Doctor D ON A.doctor_id = D.doctor_id
-WHERE D.salary > 200000;  -- Change the salary threshold as needed
+
+-- 5.Find patients who have appointments with doctors earning above a certain salary using a correlated subquery
+SELECT P.patient_name 
+FROM Patient P 
+WHERE EXISTS (
+    SELECT 1 
+    FROM Appointment A 
+    JOIN Doctor D ON A.doctor_id = D.doctor_id 
+    WHERE A.patient_id = P.patient_id AND D.salary > 200000
+);
+
 
 -- 6. Get the list of patients who have appointments with a specific doctor
 SELECT P.patient_name, A.appointment_date
