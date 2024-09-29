@@ -48,7 +48,8 @@ Explanation: This query retrieves a complete list of all doctors in the database
 Query 2:
 This query lists all patients from a specific hospital
 
-<img width="551" alt="Screenshot 2024-09-29 at 5 55 21 PM" src="https://github.com/user-attachments/assets/6476f0bb-fd02-480f-8f6f-630b9db3de00">
+<img width="694" alt="Screenshot 2024-09-29 at 6 16 50 PM" src="https://github.com/user-attachments/assets/14dfa86a-e1ab-4988-8ca2-634f0203e318">
+
 
 Explanation: This query provides the names and addresses of patients affiliated with a particular hospital. Managers can use this information for targeted outreach, follow-up care, or patient satisfaction surveys. It can also aid in understanding patient demographics and improving community engagement.
 
@@ -104,7 +105,7 @@ Explanation: This query totals the number of appointments at each hospital. For 
 Query 9:
 This query finds patients who have appointments with doctors earning above a certain salary.
 
-<img width="799" alt="Screenshot 2024-09-29 at 6 07 53 PM" src="https://github.com/user-attachments/assets/d1835ee3-9b16-4177-97d0-5ec4ef521cf3">
+<img width="694" alt="Screenshot 2024-09-29 at 6 15 40 PM" src="https://github.com/user-attachments/assets/51189e19-c2d6-4a56-9c44-56bcd87e415f">
 
 Explanation: This query identifies patients who have appointments with doctors earning above a specified salary. For managers, understanding the relationship between high-salary doctors and their patients can help in evaluating service quality and patient outcomes. It can also inform salary negotiation discussions and promote equitable pay practices.
 Query 10:
@@ -112,7 +113,8 @@ Query 10:
 
 This query gets a list of patients who have appointments with a specific doctor.
 
-<img width="799" alt="Screenshot 2024-09-29 at 6 08 45 PM" src="https://github.com/user-attachments/assets/7d49cc9c-4224-4915-8e19-4288a1f868f2">
+<img width="694" alt="Screenshot 2024-09-29 at 6 16 23 PM" src="https://github.com/user-attachments/assets/53acea72-167d-421f-b9a8-88917f0049a8">
+
 
 Explanation: This query retrieves patients scheduled with a specific doctor. For managers, this information is useful for monitoring the patient load of individual doctors, ensuring that patient needs are met, and planning for follow-up care. It can also help identify patterns in patient visits that could inform scheduling adjustments.
 
