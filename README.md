@@ -71,17 +71,18 @@ Explanation: This query counts the number of appointments associated with each d
 
 
 Query 5:
-This query finds doctors and their corresponding hospitals.
+This query finds doctors and their corresponding hospitals, ordered by hospital name.
 
-<img width="566" alt="Screenshot 2024-09-29 at 5 58 37 PM" src="https://github.com/user-attachments/assets/b4368d16-cf03-435e-bc8b-78c06b24bf66">
+<img width="951" alt="Screenshot 2024-09-29 at 6 27 40 PM" src="https://github.com/user-attachments/assets/967a4990-a44e-4f8c-9fea-f19465e06ae0">
 
 Explanation: This query pairs doctors with their respective hospitals. For managers, knowing which doctors work at which hospitals facilitates better communication and coordination of care. It can also aid in managing referrals and ensuring that patients are directed to the appropriate specialists.
 
 
 Query 6:
-This query gets the average salary of doctors by their years of experience.
+This query gets the average salary of doctors by their years of experience, filtering those with an avergge salary over 200,000.
 
-<img width="573" alt="Screenshot 2024-09-29 at 6 05 46 PM" src="https://github.com/user-attachments/assets/d65ff9d6-95fa-4306-bd78-a259b5c1ecac">
+
+<img width="950" alt="Screenshot 2024-09-29 at 6 28 39 PM" src="https://github.com/user-attachments/assets/7b34a8f7-2053-4819-b4f4-8dc22dcdeb06">
 
 Explanation: This query calculates the average salary of doctors based on their years of experience. Managers can utilize this information to ensure competitive salary offerings, which is critical for recruiting and retaining talent in a competitive healthcare market. It also helps in budget planning.
 
@@ -95,9 +96,11 @@ Explanation: This query displays the patients and their corresponding doctors fo
 
 
 Query 8:
-This query gets the total number of appointments per hospital.
+This query gets the total number of appointments per hospital, filtering those with more than 1 appointment.
 
-<img width="663" alt="Screenshot 2024-09-29 at 6 07 19 PM" src="https://github.com/user-attachments/assets/f0da8b3b-d010-4fd8-8e03-835195b32cf6">
+
+<img width="952" alt="Screenshot 2024-09-29 at 6 26 46 PM" src="https://github.com/user-attachments/assets/5a584912-28d8-47ef-bed8-6e7053ec6c58">
+
 
 Explanation: This query totals the number of appointments at each hospital. For managers, this data is vital for assessing hospital performance, identifying trends in patient visits, and informing resource allocation decisions. It helps ensure that facilities are adequately staffed to meet patient needs.
 
@@ -105,7 +108,8 @@ Explanation: This query totals the number of appointments at each hospital. For 
 Query 9:
 This query finds patients who have appointments with doctors earning above a certain salary.
 
-<img width="694" alt="Screenshot 2024-09-29 at 6 15 40 PM" src="https://github.com/user-attachments/assets/51189e19-c2d6-4a56-9c44-56bcd87e415f">
+<img width="967" alt="Screenshot 2024-09-29 at 6 25 25 PM" src="https://github.com/user-attachments/assets/ea617e5d-1dc2-4c19-bdc0-0864351b838a">
+
 
 Explanation: This query identifies patients who have appointments with doctors earning above a specified salary. For managers, understanding the relationship between high-salary doctors and their patients can help in evaluating service quality and patient outcomes. It can also inform salary negotiation discussions and promote equitable pay practices.
 Query 10:
