@@ -1,62 +1,68 @@
 -- Use the database
-USE ha_crh06350;
+
+USE ha_jip46096;
+
 
 -- Creating Tables with Foreign Keys
 
+
+-- Creating the Hospital table
 CREATE TABLE Hospital (
     hospital_id INT PRIMARY KEY,
     hospital_name VARCHAR(45),
     hospital_address VARCHAR(45),
-    hospital_phone INT,
+    hospital_phone BIGINT,  -- BIGINT to avoid out-of-range issues
     type VARCHAR(45)
 );
 
+-- Creating the Doctor table
+CREATE TABLE Doctor (
+    doctor_id INT PRIMARY KEY,
+    hospital_id INT,
+    doctor_name VARCHAR(45),
+    doctor_phone BIGINT,  -- Changed to BIGINT
+    doctor_email VARCHAR(45),
+    years_of_experience INT,
+    salary INT,
+    FOREIGN KEY (hospital_id) REFERENCES Hospital(hospital_id)  -- Add this line to reference Hospital
+);
+
+
+
+-- Creating the Department table
 CREATE TABLE Department (
     department_id INT PRIMARY KEY,
     hospital_id INT,
     department_head_id INT,
     department_name VARCHAR(45),
-    department_phone INT,
+    department_phone BIGINT,
     size INT,
-    floor INT,
-    FOREIGN KEY (hospital_id) REFERENCES Hospital(hospital_id),
-    FOREIGN KEY (department_head_id) REFERENCES Doctor(doctor_id)  -- reference department heads
+    floor INT
 );
 
-CREATE TABLE Doctor (
-    doctor_id INT PRIMARY KEY,
-    department_id INT,
-    doctor_name VARCHAR(45),
-    doctor_phone INT,
-    doctor_email VARCHAR(45),
-    years_of_experience INT,
-    salary INT,
-    FOREIGN KEY (department_id) REFERENCES Department(department_id)
-);
-
+-- Creating the Patient table
 CREATE TABLE Patient (
     patient_id INT PRIMARY KEY,
     hospital_id INT,
     patient_name VARCHAR(45),
     patient_address VARCHAR(45),
     patient_email VARCHAR(45),
-    patient_phone INT,
+    patient_phone BIGINT,
     sex VARCHAR(45),
     race VARCHAR(45),
-    age INT,
-    FOREIGN KEY (hospital_id) REFERENCES Hospital(hospital_id)
+    age INT
 );
 
+-- Creating the Appointment table
 CREATE TABLE Appointment (
     patient_id INT,
     doctor_id INT,
     appointment_date DATE,
     reason_for_appointment VARCHAR(45),
-    PRIMARY KEY (patient_id, doctor_id, appointment_date),
-    FOREIGN KEY (patient_id) REFERENCES Patient(patient_id),
-    FOREIGN KEY (doctor_id) REFERENCES Doctor(doctor_id)
+    PRIMARY KEY (patient_id, doctor_id, appointment_date)
 );
 
+-- Creating the Medication table
 CREATE TABLE Medication (
     medication_id INT PRIMARY KEY,
     medication_name VARCHAR(45),
@@ -64,16 +70,16 @@ CREATE TABLE Medication (
     price DECIMAL(6,2)
 );
 
+-- Creating the Prescription table
 CREATE TABLE Prescription (
     prescription_id INT PRIMARY KEY,
     patient_id INT,
     doctor_id INT,
     medication_id INT,
-    prescription_date DATE,
-    FOREIGN KEY (patient_id) REFERENCES Patient(patient_id),
-    FOREIGN KEY (doctor_id) REFERENCES Doctor(doctor_id),
-    FOREIGN KEY (medication_id) REFERENCES Medication(medication_id)
+    prescription_date DATE
 );
+
+
 
 -- Inserting Data
 
@@ -137,108 +143,82 @@ INSERT INTO Appointment VALUES
 (1009, 109, '2023-09-23', 'Gastrointestinal issues'),
 (1010, 110, '2023-09-24', 'Endocrine system checkup');
 
+
+-- Adding Foreign Keys after data insertion
+ALTER TABLE Department
+ADD CONSTRAINT FK_Hospital_Department FOREIGN KEY (hospital_id) REFERENCES Hospital(hospital_id),
+ADD CONSTRAINT FK_Doctor_Department FOREIGN KEY (department_head_id) REFERENCES Doctor(doctor_id);
+
+ALTER TABLE Patient
+ADD CONSTRAINT FK_Hospital_Patient FOREIGN KEY (hospital_id) REFERENCES Hospital(hospital_id);
+
+ALTER TABLE Appointment
+ADD CONSTRAINT FK_Patient_Appointment FOREIGN KEY (patient_id) REFERENCES Patient(patient_id),
+ADD CONSTRAINT FK_Doctor_Appointment FOREIGN KEY (doctor_id) REFERENCES Doctor(doctor_id);
+
+ALTER TABLE Prescription
+ADD CONSTRAINT FK_Patient_Prescription FOREIGN KEY (patient_id) REFERENCES Patient(patient_id),
+ADD CONSTRAINT FK_Doctor_Prescription FOREIGN KEY (doctor_id) REFERENCES Doctor(doctor_id),
+ADD CONSTRAINT FK_Medication_Prescription FOREIGN KEY (medication_id) REFERENCES Medication(medication_id);
+
+
+
 -- Queries
 
--- Simple Queries
+--- Simple Queries
 
--- Query 1 (Simple): List All Patients with Their Corresponding Hospital
--- Natural Language: Retrieve a list of all patients along with the hospitals they are associated with.
--- Managerial Justification: This query provides an overview of which hospital each patient is associated with. Managers can use this information to monitor hospital capacity, identify patients at specific locations, and manage resources efficiently.
-SELECT p.patient_name, h.hospital_name
-FROM Patient p
-JOIN Hospital h ON p.hospital_id = h.hospital_id;
+-- 1. List all doctors
+SELECT * FROM Doctor;
 
+-- 2. Get all patients from a specific hospital
+SELECT patient_name, patient_address
+FROM Patient
+WHERE hospital_id = 1;  -- Change the hospital_id as needed
 
-
--- Query 2 (Simple): List All Medications Along with Their Price and Dosage
--- Natural Language: Retrieve all medications along with their price and dosage information.
--- Managerial Justification: This query provides an overview of the hospital’s medication inventory. Managers can use this information for inventory control and to ensure that medications are priced appropriately for patients.
-SELECT medication_name, dosage, price
+-- 3. Retrieve all medications and their prices
+SELECT medication_name, price
 FROM Medication;
 
-
-
--- Query 3 (Simple): Count of Patients in Each Hospital
--- Natural Language: Find the total number of patients admitted to each hospital.
--- Managerial Justification: This query helps managers understand the distribution of patients across hospitals. It aids in hospital resource allocation, staff management, and decision-making regarding expansions or reallocations based on patient loads.
-SELECT h.hospital_name, COUNT(p.patient_id) AS patient_count
-FROM Hospital h
-JOIN Patient p ON h.hospital_id = p.hospital_id
-GROUP BY h.hospital_name;
-
-
-
--- Query 4 (Simple): Total Number of Appointments per Doctor
--- Natural Language: Retrieve the total number of appointments handled by each doctor.
--- Managerial Justification: This query helps managers assess the workload of each doctor. It is essential for workforce planning and determining whether doctors are overworked or underutilized.
-SELECT d.doctor_name, COUNT(a.patient_id) AS total_appointments
-FROM Appointment a
-JOIN Doctor d ON a.doctor_id = d.doctor_id
-GROUP BY d.doctor_name;
-
-
+-- 4. Count the number of appointments for each doctor
+SELECT doctor_id, COUNT(*) AS appointment_count
+FROM Appointment
+GROUP BY doctor_id;
 
 -- Complex Queries
 
--- Query 5 (Complex): Total Salary Paid to Doctors in Each Hospital
--- Natural Language: Find the total salary of doctors for each hospital.
--- Managerial Justification: This query helps managers assess the total salary expenditure on doctors for each hospital. It provides insights into hospital costs and helps in budgeting and financial planning.
-SELECT h.hospital_name, SUM(d.salary) AS total_salary
-FROM Hospital h
-JOIN Department dep ON h.hospital_id = dep.hospital_id
-JOIN Doctor d ON dep.department_id = d.department_id
-GROUP BY h.hospital_name;
+-- 1. Find doctors and their corresponding hospitals
+SELECT D.doctor_name, H.hospital_name
+FROM Doctor D
+JOIN Hospital H ON D.hospital_id = H.hospital_id;
 
+-- 2. Get the average salary of doctors by their years of experience
+SELECT years_of_experience, AVG(salary) AS average_salary
+FROM Doctor
+GROUP BY years_of_experience;
 
+-- 3. List patients and their doctors for a specific appointment date
+SELECT P.patient_name, D.doctor_name, A.appointment_date
+FROM Appointment A
+JOIN Patient P ON A.patient_id = P.patient_id
+JOIN Doctor D ON A.doctor_id = D.doctor_id
+WHERE A.appointment_date = '2023-09-24';  -- Change the date as needed
 
--- Query 6 (Complex): Average Medication Price Prescribed by Each Doctor
--- Natural Language: Calculate the average price of medications prescribed by each doctor.
--- Managerial Justification: This query helps managers monitor the average cost of medications prescribed by doctors, allowing them to identify trends and manage costs for both patients and the hospital.
-SELECT d.doctor_name, AVG(m.price) AS avg_medication_price
-FROM Prescription pr
-JOIN Doctor d ON pr.doctor_id = d.doctor_id
-JOIN Medication m ON pr.medication_id = m.medication_id
-GROUP BY d.doctor_name;
+-- 4. Get the total number of appointments per hospital
+SELECT H.hospital_name, COUNT(A.patient_id) AS total_appointments
+FROM Appointment A
+JOIN Patient P ON A.patient_id = P.patient_id
+JOIN Hospital H ON P.hospital_id = H.hospital_id
+GROUP BY H.hospital_name;
 
+-- 5. Find patients who have appointments with doctors earning above a certain salary
+SELECT P.patient_name, D.doctor_name, D.salary
+FROM Appointment A
+JOIN Patient P ON A.patient_id = P.patient_id
+JOIN Doctor D ON A.doctor_id = D.doctor_id
+WHERE D.salary > 200000;  -- Change the salary threshold as needed
 
-
--- Query 7 (Complex): Patients Who Have Never Been Prescribed a Medication
--- Natural Language: List patients who have never received a prescription.
--- Managerial Justification: This query identifies patients who may not have received proper follow-up care. Managers can use this data to ensure that all patients have received appropriate prescriptions and care when needed.
-SELECT p.patient_name
-FROM Patient p
-WHERE NOT EXISTS (SELECT 1 FROM Prescription pr WHERE p.patient_id = pr.patient_id);
-
-
--- Query 8 (Complex): Total Number of Appointments by Department
--- Natural Language: Find the total number of appointments handled by each department.
--- Managerial Justification: This query helps managers assess the workload for each department. It provides insight into whether specific departments are under or overburdened and can guide resource allocation.
-SELECT dep.department_name, COUNT(a.patient_id) AS total_appointments
-FROM Appointment a
-JOIN Doctor d ON a.doctor_id = d.doctor_id
-JOIN Department dep ON d.department_id = dep.department_id
-GROUP BY dep.department_name;
-
-
-
--- Query 9 (Complex): Doctors Who Have Prescribed More Than One Medication
--- Natural Language: Find doctors who have prescribed more than one type of medication.
--- Managerial Justification: This query identifies doctors who have prescribed a wider variety of medications. This may indicate a broader scope of care or more complex cases and can help managers analyze prescribing habits.
-SELECT d.doctor_name, COUNT(DISTINCT m.medication_id) AS medication_count
-FROM Prescription pr
-JOIN Doctor d ON pr.doctor_id = d.doctor_id
-JOIN Medication m ON pr.medication_id = m.medication_id
-GROUP BY d.doctor_name
-HAVING medication_count > 1;
-
-
-
--- Query 10 (Complex): Highest Earning Doctor in Each Department
--- Natural Language: Identify the doctor with the highest salary in each department.
--- Managerial Justification: This query is useful for managers in determining compensation strategies, analyzing how the highest-paid doctors are distributed across departments, and ensuring equitable pay across the organization.
-SELECT dep.department_name, d.doctor_name, d.salary
-FROM Doctor d
-JOIN Department dep ON d.department_id = dep.department_id
-WHERE d.salary = (SELECT MAX(d2.salary) FROM Doctor d2 WHERE d2.department_id = d.department_id);
-
-
+-- 6. Get the list of patients who have appointments with a specific doctor
+SELECT P.patient_name, A.appointment_date
+FROM Appointment A
+JOIN Patient P ON A.patient_id = P.patient_id
+WHERE A.doctor_id = 102;  -- Change the doctor_id as needed
