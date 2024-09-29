@@ -143,6 +143,18 @@ INSERT INTO Appointment VALUES
 (1009, 109, '2023-09-23', 'Gastrointestinal issues'),
 (1010, 110, '2023-09-24', 'Endocrine system checkup');
 
+INSERT INTO Medication (medication_id, medication_name, dosage, price) VALUES 
+(1, 'Aspirin', '500mg', 12.50),
+(2, 'Ibuprofen', '200mg', 10.00),
+(3, 'Acetaminophen', '500mg', 8.00),
+(4, 'Amoxicillin', '250mg', 15.75),
+(5, 'Lisinopril', '10mg', 20.00),
+(6, 'Metformin', '500mg', 18.50),
+(7, 'Simvastatin', '20mg', 22.00),
+(8, 'Omeprazole', '20mg', 19.99),
+(9, 'Levothyroxine', '50mcg', 24.00),
+(10, 'Sertraline', '50mg', 28.00);
+
 
 -- Adding Foreign Keys after data insertion
 ALTER TABLE Department
