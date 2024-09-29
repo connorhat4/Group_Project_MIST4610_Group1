@@ -37,6 +37,51 @@ The result of an appointment is one or more prescriptions, because of this, a ne
 
 # Queries:
 
+Query 1:
+This query lists all the doctors in the database.
+<img width="1023" alt="Screenshot 2024-09-29 at 5 51 49 PM" src="https://github.com/user-attachments/assets/437b3e62-6855-40b2-b7d7-9c74243181ff">
+
+Explanation: This query retrieves a complete list of all doctors in the database. For managers, having visibility into the entire roster of doctors helps in resource allocation, understanding staff availability, and planning schedules effectively. It can also assist in ensuring that the right mix of specialties is represented.
+
+Query 2:
+This query lists all patients from a specific hospital
+<img width="551" alt="Screenshot 2024-09-29 at 5 55 21 PM" src="https://github.com/user-attachments/assets/6476f0bb-fd02-480f-8f6f-630b9db3de00">
+Explanation: This query provides the names and addresses of patients affiliated with a particular hospital. Managers can use this information for targeted outreach, follow-up care, or patient satisfaction surveys. It can also aid in understanding patient demographics and improving community engagement.
+
+Query 3:
+Ths query retrieves all medications and their prices.
+<img width="705" alt="Screenshot 2024-09-29 at 6 10 40 PM" src="https://github.com/user-attachments/assets/7330334f-f642-42da-9826-86914cebe95e">
+Explanation: This query lists all medications along with their prices. Managers can use this information to assess the hospital's inventory costs and identify potential areas for cost savings. Understanding medication pricing is crucial for budgeting and ensuring that patients receive affordable care options.
+
+Query 4:
+This query counts the number of appointments for each doctor.
+<img width="596" alt="Screenshot 2024-09-29 at 5 57 23 PM" src="https://github.com/user-attachments/assets/eafeef5d-8736-4ced-8738-5e2ea3234473">
+Explanation: This query counts the number of appointments associated with each doctor. For managers, this data can help in evaluating workload distribution among doctors. Understanding which doctors have the most appointments can inform staffing decisions and assist in balancing patient loads to prevent burnout.
+Query 5:
+This query finds doctors and their corresponding hospitals.
+<img width="566" alt="Screenshot 2024-09-29 at 5 58 37 PM" src="https://github.com/user-attachments/assets/b4368d16-cf03-435e-bc8b-78c06b24bf66">
+Explanation: This query pairs doctors with their respective hospitals. For managers, knowing which doctors work at which hospitals facilitates better communication and coordination of care. It can also aid in managing referrals and ensuring that patients are directed to the appropriate specialists.
+Query 6:
+This query gets the average salary of doctors by their years of experience.
+<img width="573" alt="Screenshot 2024-09-29 at 6 05 46 PM" src="https://github.com/user-attachments/assets/d65ff9d6-95fa-4306-bd78-a259b5c1ecac">
+Explanation: This query calculates the average salary of doctors based on their years of experience. Managers can utilize this information to ensure competitive salary offerings, which is critical for recruiting and retaining talent in a competitive healthcare market. It also helps in budget planning.
+Query 7:
+This query lists patients and their doctors for a specific appointment date.
+<img width="663" alt="Screenshot 2024-09-29 at 6 06 36 PM" src="https://github.com/user-attachments/assets/4d225364-1b04-443a-b0ec-90c31e6bcaf7">
+Explanation: This query displays the patients and their corresponding doctors for a specified appointment date. Managers can use this information to analyze appointment trends, identify peak times, and optimize scheduling practices. It also assists in ensuring that staffing levels match patient demand.
+Query 8:
+This query gets the total number of appointments per hospital.
+<img width="663" alt="Screenshot 2024-09-29 at 6 07 19 PM" src="https://github.com/user-attachments/assets/f0da8b3b-d010-4fd8-8e03-835195b32cf6">
+Explanation: This query totals the number of appointments at each hospital. For managers, this data is vital for assessing hospital performance, identifying trends in patient visits, and informing resource allocation decisions. It helps ensure that facilities are adequately staffed to meet patient needs.
+Query 9:
+This query finds patients who have appointments with doctors earning above a certain salary.
+<img width="799" alt="Screenshot 2024-09-29 at 6 07 53 PM" src="https://github.com/user-attachments/assets/d1835ee3-9b16-4177-97d0-5ec4ef521cf3">
+Explanation: This query identifies patients who have appointments with doctors earning above a specified salary. For managers, understanding the relationship between high-salary doctors and their patients can help in evaluating service quality and patient outcomes. It can also inform salary negotiation discussions and promote equitable pay practices.
+Query 10:
+This query gets a list of patients who have appointments with a specific doctor.
+<img width="799" alt="Screenshot 2024-09-29 at 6 08 45 PM" src="https://github.com/user-attachments/assets/7d49cc9c-4224-4915-8e19-4288a1f868f2">
+Explanation: This query retrieves patients scheduled with a specific doctor. For managers, this information is useful for monitoring the patient load of individual doctors, ensuring that patient needs are met, and planning for follow-up care. It can also help identify patterns in patient visits that could inform scheduling adjustments.
+
 # Database information:
 | Feature                    | Query 1 | Query 2 | Query 3 | Query 4 | Query 5 | Query 6 | Query 7 | Query 8 | Query 9 | Query 10 |
 |----------------------------|---------|---------|---------|---------|---------|---------|---------|---------|---------|----------|
