@@ -125,12 +125,16 @@ Explanation: This query retrieves patients scheduled with a specific doctor. For
 
 
 # Database information:
-| Feature                    | Query 1 | Query 2 | Query 3 | Query 4 | Query 5 | Query 6 | Query 7 | Query 8 | Query 9 | Query 10 |
-|----------------------------|---------|---------|---------|---------|---------|---------|---------|---------|---------|----------|
-| **Multiple Table Join**     |    x    |         |    x    |    x    |    x    |    x    |         |    x    |    x    |    x     |
-| **Subquery**                |         |         |         |         |         |         |    x    |         |         |    x     |
-| **Aggregation (SUM, AVG)**  |         |         |    x    |    x    |    x    |    x    |         |    x    |         |          |
-| **HAVING Clause**           |         |         |         |         |         |         |         |         |    x    |          |
-| **Group By**                |         |         |    x    |    x    |    x    |    x    |         |    x    |    x    |    x     |
-| **NOT EXISTS Clause**       |         |         |         |         |         |         |    x    |         |         |          |
+| Feature               | Query 1 | Query 2 | Query 3 | Query 4 | Query 5 | Query 6 | Query 7 | Query 8 | Query 9 | Query 10 |
+|-----------------------|---------|---------|---------|---------|---------|---------|---------|---------|---------|----------|
+| Simple SELECT         |    x    |    x    |    x    |         |         |         |         |         |         |          |
+| Multiple Table Join    |         |         |         |         |    x    |         |    x    |    x    |    x    |    x     |
+| Subquery              |         |         |         |         |         |         |         |         |    x    |          |
+| Group By              |         |         |         |    x    |         |    x    |         |    x    |         |          |
+| Having Clause         |         |         |         |         |         |    x    |         |    x    |         |          |
+| Aggregation (COUNT)   |         |         |         |    x    |         |         |         |    x    |         |          |
+| Aggregation (AVG)     |         |         |         |         |         |    x    |         |         |         |          |
+| Filtering (WHERE)     |         |    x    |         |         |         |         |    x    |         |    x    |    x     |
+| Ordering (ORDER BY)   |         |         |         |         |    x    |         |         |         |         |          |
+
 
